@@ -158,7 +158,7 @@ body, select, input, textarea {
 /* Headers (h1, h2, etc) have no default font-size or margin; define those yourself */
 h1, h2, h3, h4, h5, h6 { font-weight: bold; }
 
-a, a:active, a:visited { color: #607890; }
+a, a:active, a:visited { color: #444; text-decoration:none; }
 a:hover { color: #036; }
 
 
@@ -169,19 +169,191 @@ a:hover { color: #036; }
  */
 
 
+.container {
+    position: absolute; 
+    top: 37%; 
+    left: 50%;
+    margin: -300px 0 0 -390px; }
+	
+	
+    
+
+.content h1 {
+	font-size: 40px; 
+	text-transform: uppercase; 
+	font-weight: bold; 
+	text-align: center;
+	margin-top: 180px;
+	color: #222;
+	line-height: 50px;  }
+.content h3 {
+	text-align: center; 
+	font-size: 22px; 
+	color: #222; }
+	
+	#leftside, #rightside{
+		height:60px;
+		width:300px;
+		margin:210px 50px;
+		font-size:50px;
+		font-weight:bold;
+	}
+	
+	#rightside{
+		float:right;
+	}
+	
+	#leftside{
+		float:left;
+	}
+	
+	.side-ul li{
+		margin:10px 0px;
+		
+	}
+	
+	.side-ul li a:hover{
+		color:red;
+		cursor:pointer;
+	}
+	
+	.side-ul li a:hover{
+		-webkit-transition-property: color;
+		-webkit-transition-duration: .4s;
+		
+		-moz-transition-property: color;
+		-moz-transition-duration: .4s;
+	}
+
+	
+	h1{
+		font-family: 'Damion', arial, serif;
+		font-size:90px;
+		
+		margin:0px 0px 20px -130px;
+		
+	}
+	
+	
+	
+   form label {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+   form p.input {
+    padding: .5em 0;
+    text-align: center;
+    margin: 0;
+  }
+   form input.text,  form textarea.text {
+    float: none;
+    width: 35%;
+  }
+   form input.submit {
+    left: auto;
+    margin: 0;
+  }
+  
+  
+ form p.error, p.error {
+  margin: 0 0 1em;
+  padding: .5em 1em;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background: #fff;
+  color: red;
+  border: 1px solid red;
+}
+ form p.success {
+  margin: 0 0 1em;
+  padding: .5em 1em;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  color: green;
+  border: 1px solid green;
+}
 
 
+ form label.error{
+	
+	display:none;
+ margin: 0 0 1em;
+  padding: .5em 1em;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background: #fff;
+  color: red;
+  border: 1px solid red;	
+}
+ form input.text, .tab_content form textarea {
+  width: 26%;
+  float:left;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  padding: 6px;
+  margin: 0;
+  border: 1px solid #d5d1c2;
+  color: #918d7e;
+  box-shadow: 0 0 3px 0 #e6e2d3;
+  -webkit-box-shadow: 0 0 3px 0 #e6e2d3;
+  -moz-box-shadow: 0 0 3px 0 #e6e2d3;
+}
+ form input:focus,  form textarea:focus {
+  outline: 0;
+  box-shadow: 0 0 5px 0 #6f6b5c;
+  -webkit-box-shadow: 0 0 5px 0 #6f6b5c;
+  -moz-box-shadow: 0 0 5px 0 #6f6b5c;
+}
+ form input::-webkit-input-placeholder,  form textarea::-webkit-input-placeholder {
+  color: #b3afa0;
+}
+ form input:-moz-placeholder,  form textarea:-moz-placeholder {
+  color: #b3afa0;
+}
+ form input.submit {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  padding: .75em 2em;
+  color: #1a1607;
+  border: 1px solid #c4c0b1;
+  background: #e6e2d3;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f7f3e4), to(#e6e2d3));
+  background: -webkit-linear-gradient(#f7f3e4, #e6e2d3);
+  background: -moz-linear-gradient(center top, #f7f3e4 0%, #e6e2d3 100%);
+  background: -moz-gradient(center top, #f7f3e4 0%, #e6e2d3 100%);
+  font-weight: bold;
+  box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+  -webkit-box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+  -moz-box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+ 	float:left;
+}
+ form input.submit:hover {
+  background: #e6e2d3;
+  background: -webkit-gradient(linear, left top, left bottom, from(#d5d1c2), to(#e6e2d3));
+  background: -webkit-linear-gradient(#d5d1c2, #e6e2d3);
+  background: -moz-linear-gradient(center top, #d5d1c2 0%, #e6e2d3 100%);
+  background: -moz-gradient(center top, #d5d1c2 0%, #e6e2d3 100%);
+  box-shadow: inset 0 1px 2px 0 #d5d1c2;
+  -webkit-box-shadow: inset 0 1px 2px 0 #d5d1c2;
+  -moz-box-shadow: inset 0 1px 2px 0 #d5d1c2;
+}
 
+.clear{
+	
+	clear:both;
+}
 
-
-
-
-
-
-
-
-
-
+#login-section{
+	margin:20px;
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.

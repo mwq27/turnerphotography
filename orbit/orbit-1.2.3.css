@@ -11,7 +11,7 @@
 #featured { 
 	width: 940px;
 	height: 850px;
-	background: #000 url('orbit/loading.gif') no-repeat center center;
+	background: #000 url('/images/loading.gif') no-repeat center center;
 	overflow: hidden; }
 #featured>img,  
 #featured>div,

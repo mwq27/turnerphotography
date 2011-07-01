@@ -5,13 +5,14 @@
 <!--[if IE 8 ]>    <html class="no-js ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
+	<link href='http://fonts.googleapis.com/css?family=Damion&v1' rel='stylesheet' type='text/css'>
   <meta charset="utf-8">
 
   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title></title>
+  <title><?=$title?></title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,7 +26,8 @@
 
   <!-- CSS: implied media="all" -->
   <link rel="stylesheet" href="/css/style.css?v=2">
-
+	<link rel="stylesheet" href="/css/orbit-1.2.3.css?v=2">
+	<link rel="stylesheet" href="/css/jquery.plupload.queue.css?v=2">
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
 

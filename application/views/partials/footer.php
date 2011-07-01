@@ -9,8 +9,17 @@
 
 
   <!-- scripts concatenated and minified via ant build script-->
+  <script src="/js/libs/jquery.orbit-1.2.3.js"></script>
+  	<script type="text/javascript">
+			$(window).load(function() {
+				$('#featured').orbit();
+			});
+	</script>
   <script src="/js/plugins.js"></script>
   <script src="/js/script.js"></script>
+  <script src="/js/libs/plupload.full.js"></script>
+  <script src="/js/libs/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+  
   <!-- end scripts-->
 
 
