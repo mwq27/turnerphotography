@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Image extends CI_Model {
+class Admin_model extends CI_Model {
 	
 		function db_safe($data) {
 	  
@@ -12,41 +12,6 @@ class Image extends CI_Model {
 	  }
 		
 		
-		function get_images($cat){
-								
-				$this->db->select("filename")->from('images')->where('category', $cat);
-				
-				
-				$query = $this->db->get();
-				return $query->result();
-		}
-		
-		function get_all_images(){
-				$this->db->select("filename")->from('images');
-				
-				
-				$query = $this->db->get();
-				return $query->result();
-			
-		}
-		
-		function get_catids(){
-			$this->db->select("*")->from("categories");
-			$query = $this->db->get();
-			foreach($query->result_array() as $val){
-				$cats[$val["id"]] = $val["category"];
-			}
-			return $cats;
-			
-		}
-		
-		function new_image($name, $cid){
-			
-			$date = date("Y-m-d g:i:s");
-			$sql = "insert into images set filename = '{$name}', category = '{$cid}',created_at = '{$date}'";
-			$this->db->query($sql);
-			
-		}
 		
 		
 		function login_user($uname, $pword)
@@ -54,7 +19,7 @@ class Image extends CI_Model {
 			
 			//$p = mysql_fetch_array($run);
 			
-			$sql = "select salt, password from users where email = '{$uname}' limit 1";
+			$sql = "select salt, password from users where username = '{$uname}' limit 1";
 			$run = mysql_query($sql);
 			$p = mysql_fetch_array($run);
                         //check if club_id is set
@@ -66,7 +31,7 @@ class Image extends CI_Model {
 			if($hashed_password  == $db_pword){
 			 //success
 			
-			   $sql = "select * from users where email = '{$uname}' limit 1";
+			   $sql = "select * from users where username = '{$uname}' limit 1";
 					  
 		         $query = $this->db->query($sql);
 		        
@@ -78,23 +43,20 @@ class Image extends CI_Model {
 			}
 		}
 		
-		function register($email, $pword, $name, $bname, $about_s, $about_l, $tagline, $tagid, $networks)
+		function register($email, $pword)
 		{
 			
 			$email = $this->db_safe($email);
-		    $name = $this->db_safe($name);
-			$bname = $this->db_safe($bname);
-			$about_s = $this->db_safe($about_s);
-			$about_l = $this->db_safe($about_l);
+		   
 		    $pword = $this->db_safe($pword);
-			$tagline = $this->db_safe($tagline);
+			
 			
 		    $salt = '';
 		      //$pword = db_safe($email);
 		  
 		    $pword = generateHash($pword, $salt);
-			$date = date("Y-m-d g:i:s");
-			$sql = "insert into users set email = '{$email}', tag_id = '{$tagid}', name = '{$name}', business = '{$bname}', networks = '{$networks}', about_short = '{$about_s}', about_long = '{$about_l}', password = '{$pword}', salt='{$salt}', tagline = '{$tagline}', created_at = '{$date}'";
+			
+			$sql = "insert into users set username = '{$email}', password = '{$pword}', salt='{$salt}'";
 					
 			$query = $this->db->query($sql);
 			if($query){
@@ -214,4 +176,5 @@ class Image extends CI_Model {
 			
 		}
 }
+
 	

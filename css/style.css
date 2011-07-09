@@ -171,9 +171,9 @@ a:hover { color: #036; }
 
 .container {
     position: absolute; 
-    top: 37%; 
+    top: 30%; 
     left: 50%;
-    margin: -300px 0 0 -390px; }
+    margin: -300px 0 0 -370px; }
 	
 	
     
@@ -230,7 +230,7 @@ a:hover { color: #036; }
 		font-family: 'Damion', arial, serif;
 		font-size:90px;
 		
-		margin:0px 0px 20px -130px;
+		margin:0px 0px 20px -160px;
 		
 	}
 	
@@ -351,8 +351,19 @@ a:hover { color: #036; }
 	clear:both;
 }
 
-#login-section{
+#login-section, #reg-section{
 	margin:20px;
+}
+
+#admin-new-images a{
+	display:block;
+	font-size:32px;
+	font-weight:bold;
+	margin:10px 0px;
+}
+
+#admin-new-images h2{
+	font-size:32px;
 }
 
 /**

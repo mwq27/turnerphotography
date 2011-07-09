@@ -2,16 +2,13 @@
 	
 		
 	
-	<div class="container">
-		
+	<section id="admin-new-images">
+		<?
+			foreach($categories as $key => $val){
+				echo "<a href='/admin/new_image/".$key."' >Add new ".$val." images";
+			}
+		?>
 	
+	</section>
 		
-		
-	
-		
-		
-		
-	</div>			
-
-
 <? $this->load->view("/partials/footer"); ?>

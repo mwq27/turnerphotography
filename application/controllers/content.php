@@ -12,7 +12,8 @@ class Content extends CI_Controller {
 	public function index()
 	{
 		$data["title"] = "Marcus Turner Photography";
-		
+		$images = $this->image->get_all_images();
+		$data["images"] = $images;
 		$this->load->view('/home/index', $data);
 	}
 	

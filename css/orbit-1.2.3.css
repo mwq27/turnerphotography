@@ -9,8 +9,8 @@
 /* PUT IN YOUR SLIDER ID AND SIZE TO MAKE LOAD BEAUTIFULLY
    ================================================== */
 #featured { 
-	width: 940px;
-	height: 850px;
+	width: 628px;
+	height: 800px;
 	background: #000 url('/images/loading.gif') no-repeat center center;
 	overflow: hidden; }
 #featured>img,  
