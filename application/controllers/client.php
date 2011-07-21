@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Admin extends CI_Controller {
+class Client extends CI_Controller {
 	
 	public function __construct(){
 		parent::__construct();
@@ -11,155 +11,127 @@ class Admin extends CI_Controller {
 	
 	public function index()
 	{
+		$this->load->helper(array('url'));
+		$cid = $this->uri->segment(2);	
 		
-		$this->load->helper("form");
 		$data["title"] = "Marcus Turner Photography";
-		
-		$data['categories']	 = $this->catid;
-		if($this->session->userdata("logged_in") == 1){
-			
-			$this->load->view('admin/index', $data);
-		}else{
-			$this->load->view('admin/login', $data);
-		}
+		$images = $this->image->get_all_images();
+		$data["images"] = $images;
+		$this->load->view('/home/index', $data);
 	}
 	
 	
-	public function new_client(){
+	
+	
+	public function category(){
+		$this->load->helper(array('url'));
 		
-		$data["title"] = "Marcus Turner Photography | New Client Area";
 		
-		$this->load->view('/clients/new', $data);
+		$cat = $this->uri->segment(2);
+		$data['title'] = "Marcus Turner Photography | " .$cat;
+		$keys = array_keys($this->catid, $cat); 
+		$data["catid"] = $keys[0];
 		
-		
+		$images = $this->image->get_images($keys[0]);
+		$data["images"] = $images;
+		$this->load->view("/category/category", $data);
 	}
 	
-	public function registration(){
-		$this->load->helper("form");
-		$data["title"] = "Marcus Turner Photography";
-		$this->load->view('/admin/reg-form', $data);
-	}
-	
-	public function login(){
-		$this->load->helper(array('form', 'encode'));
-		$this->load->model('admin_model');
+	public function contact(){
+		$this->load->helper(array('url', 'form'));
+		$this->load->library('email');
+		$data['title'] = 'Contact me';
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('email-log', 'Email', 'trim|required');
-		$this->form_validation->set_rules('password-log', 'Password', 'trim|required');
+		$this->form_validation->set_rules('name', 'Name', 'trim|required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required');
     
 		if ($this->form_validation->run() == FALSE){
 			
-			 $data['title'] = 'Admin Login';
-			 $this->load->view('admin/index', $data);
-		}else{
-			$username = $this->input->post('email-log', TRUE);
-			$password = $this->input->post('password-log', TRUE);
-     
-			//Try and log the user in
-			$log_res = $this->admin_model->login_user($username, $password);
-			
-			if($log_res){
-				
-								$user_array = $log_res[0];
-								$login_time = date("Y-m-d g:i:s");
-								$user_info = array(
-							   	'email'  => $username,
-							  	'login_time' => $login_time,
-							 	
-							 	'username' => $user_array->username,
-							  	'logged_in' => TRUE
-							  );
-						       		$this->session->set_userdata($user_info);
-								  //$month = 2592000 + time(); 
-						      //set_cookie('LCVIP', $user_array->firstname, $month);
-						      redirect("http://".$_SERVER['SERVER_NAME']."/".$user_array->username);
-
-				}else{
-				
-				  $data['login_error'] = "<p class='login-error'>Username and password do not match</p>";
-				  //$this->session->set_flashdata('login',"<p class='error'>Username and password do not match</p>" );
-						  
-			    	$data['title'] = 'Home | EasyTags';
-					$this->load->view('admin/index', $data);
-				
-				}
-			
-		}
-		
-	}
-
-	function register(){
-		$this->load->helper(array('form', 'url', 'encode'));
-		$this->load->model('admin_model');
-		$this->load->library('form_validation');
-		$email = $this->input->post("email", TRUE);
-		$password = $this->input->post("password", TRUE);
-		
-		
-		
-		
-		$this->form_validation->set_rules('email', 'Email address', 'trim|required');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required');
-		//$this->form_validation->set_rules('password_conf', 'Password confirmation', 'trim|required|matches[password]');
-		if ($this->form_validation->run() == FALSE){
-			
-			 $data['title'] = 'Register | EasyTags Mobile';
-			 //$this->session->set_flashdata('reg-error', 'Oops, something went wrong.  Please check your entries and try again');
-			 $this->load->view('admin/index');
 			 
+			 $this->load->view('home/contact', $data);
 		}else{
+			$name = $this->input->post('name', true);
+			$email = $this->input->post('email', true);
+			$type = $this->input->post('request', true);
+			$comments = $this->input->post('comments', true);
 			
-			$reg = $this->admin_model->register($email, $password);
-			if($reg != "fail"){
-									
-									$login_time = date("Y-m-d g:i:s");
-									$user_info = array(
-								   'username'  => $email,
-								 
-								   'user_id' => $reg,
-								  'login_time' => $login_time,
-								 'login_type' => 'admin',
-								  'logged_in' => TRUE
-								  );
-								 
-						  
-					$this->session->set_userdata($user_info);
-					$redirect = "http://".$_SERVER['SERVER_NAME']."/admin/index";
-					
-					redirect($redirect);
-				
-			}
+			$this->email->from('no-reply@marcusturnerphotography.com', 'Marcus Turner Photography');
+                $this->email->to('marques.woodson@gmail.com'); 
+                $this->email->reply_to("no-reply@marcusturnerphotography.com", "No Reply"); 
+                $this->email->bcc('marques.woodson@gmail.com'); 
+                
+                $this->email->subject('Your Last Call Vip Account Details');
+                $this->email->message("<h2>Thank you for registering with Last Call VIP</h2>
+                <ul style='list-style-type:none; font-size:14px; padding:0px;'>
+                <li> {$name} {$email}</li>
+                <li> {$comments}</li>
+                </ul>
+                <p>$type</p>
+               
+                ");  
+          
+                $this->email->send();
+				$this->load->view('home/contact-success', $data);
 		}
 		
+		
 	}
-
-	function logout(){
-			
-			$this->load->helper(array('form', 'url'));
-      		$this->session->unset_userdata('id');
-			$this->session->unset_userdata('username');
-			$this->session->unset_userdata('tag_id');
-			$this->session->unset_userdata('logged_in');
-     	  	$this->session->sess_destroy();
-		    redirect("/");
-	}
-
-	function new_image(){
+	
+	function uploadify_post(){
+		$this->load->library(array('encrypt', 'email', 'upload', 'session', 'thumbnail'));
+	
 		$this->load->helper(array('form', 'url'));
-		$catid = $this->uri->segment(3);
-		$cat = $this->catid[$catid];
-		$data["catid"] = $catid;
-		$data["category"] = $cat;
-		$this->load->view("admin/new-image", $data);
+		$this->load->model('clubs');
+		$randstr = $this->rand_str();
+		$tempFile = $_FILES['Filedata']['tmp_name'];
+		$targetPath = $_SERVER['DOCUMENT_ROOT'] . $_REQUEST['folder'] .'/';
+		$targetPaththmb = $_SERVER['DOCUMENT_ROOT'] .'/thumbs/';
+		//Rename the file
+		$targetFile =  str_replace('//','/',$targetPath).$randstr.$_FILES['Filedata']['name'];
+		$targetFilethmb = str_replace('//','/',$targetPaththmb).$randstr.$_FILES['Filedata']['name'];
+		//Shorter paths for the DB
+		$shortpath = "/uploads/".$randstr.$_FILES['Filedata']['name'];
+		$shortpathThmb = "/thumbs/".$randstr.$_FILES['Filedata']['name'];
+		//echo $targetFile; exit;
+		move_uploaded_file($tempFile,$targetFile);
+	
+		$this->thumbnail->thumbnail($targetFile);
+   				// generate image_file, set filename to resize
+		//$this->thumbnail->size_width(150);				// set width for thumbnail, or
+		//$this->thumbnail->size_height(150);				// set height for thumbnail, or
+		$this->thumbnail->size_auto(450);					// set the biggest width or height for thumbnail
+		$this->thumbnail->jpeg_quality(80);				// set quality for jpeg only (0 - 100) (worst - best), default = 75
+
+		//$thumb->show();						// show your thumbnail
+
+		$this->thumbnail->save("{$targetFile}");
 		
+		//Save the little thumbnail now
 		
+		$this->thumbnail->size_width(65);				// set width for thumbnail, or
+		$this->thumbnail->size_height(65);				// set height for thumbnail, or
+		//$this->thumbnail->size_auto(250);					// set the biggest width or height for thumbnail
+		$this->thumbnail->jpeg_quality(40);				// set quality for jpeg only (0 - 100) (worst - best), default = 75
+
+		//$thumb->show();						// show your thumbnail
+
+		$this->thumbnail->save("{$targetFilethmb}");
+		//$thumb_path = "/thumbs/".$img[full_path];
+		
+	
+		//$img_path = $img[full_path];
+		
+		//$img_path_arr = explode(".com", $img_path);
+		//$img_path = $img_path_arr[1];
+		$post_id = $this->input->post('post_id');
+			
+			$reg = $this->clubs->upload_post_img($post_id, $shortpath, $shortpathThmb);
+		echo "1";
 	}
 
 	function upload(){
-		$this->load->helper(array('url'));	
 		$targetDir = $_SERVER['DOCUMENT_ROOT'].'/images/';
-		$catid = $this->uri->segment(3);
-		
+
 			//$cleanupTargetDir = false; // Remove old files
 			//$maxFileAge = 60 * 60; // Temp file age in seconds
 			
@@ -210,8 +182,7 @@ class Admin extends CI_Controller {
 			} else
 				die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
 			*/
-			//INSERT INTO IMAGES TABLE
-					$this->image->new_image($fileName, $catid);
+			
 			// Look for the content type header
 			if (isset($_SERVER["HTTP_CONTENT_TYPE"]))
 				$contentType = $_SERVER["HTTP_CONTENT_TYPE"];
@@ -223,7 +194,6 @@ class Admin extends CI_Controller {
 			if (strpos($contentType, "multipart") !== false) {
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
 					// Open temp file
-					
 					$out = fopen($targetDir . DIRECTORY_SEPARATOR . $fileName, $chunk == 0 ? "wb" : "ab");
 					if ($out) {
 						// Read binary input stream and append it to temp file
@@ -263,7 +233,10 @@ class Admin extends CI_Controller {
 			// Return JSON-RPC response
 			die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
 			
-			
+			//INSERT INTO IMAGES TABLE
+			$this->image->new_images($fileName, $cat);
 	}
-	
+
+
+
 }

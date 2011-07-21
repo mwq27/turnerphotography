@@ -170,10 +170,12 @@ a:hover { color: #036; }
 
 
 .container {
-    position: absolute; 
-    top: 30%; 
-    left: 50%;
-    margin: -300px 0 0 -370px; }
+
+   	float:left;
+   	width:630px;
+    
+    
+   }
 	
 	
     
@@ -200,11 +202,13 @@ a:hover { color: #036; }
 	}
 	
 	#rightside{
-		float:right;
+		float:left;
 	}
 	
 	#leftside{
 		float:left;
+		margin-left:158px;
+		text-align:right;
 	}
 	
 	.side-ul li{
@@ -228,12 +232,89 @@ a:hover { color: #036; }
 	
 	h1{
 		font-family: 'Damion', arial, serif;
-		font-size:90px;
+		font-size:67px;
 		
-		margin:0px 0px 20px -160px;
+		margin:0px 0px 20px -8px;
+		text-align:center;
 		
 	}
-	
+#contactform label {
+  width: 20%;
+  
+  line-height: 2em;
+  text-align: left;
+}
+
+#contactform input.text {
+  width: 45%;
+  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  padding: 6px;
+  margin: 0;
+  border: 1px solid #d5d1c2;
+  color: #918d7e;
+  box-shadow: 0 0 3px 0 #e6e2d3;
+  -webkit-box-shadow: 0 0 3px 0 #e6e2d3;
+  -moz-box-shadow: 0 0 3px 0 #e6e2d3;
+}
+#contactform textarea {
+width:75%;	
+-webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  background: #fff;
+  padding: 6px;
+  margin: 0;
+  border: 1px solid #d5d1c2;
+  color: #918d7e;
+  box-shadow: 0 0 3px 0 #e6e2d3;
+  -webkit-box-shadow: 0 0 3px 0 #e6e2d3;
+  -moz-box-shadow: 0 0 3px 0 #e6e2d3;
+}
+#contactform input:focus, #contactform textarea:focus {
+  outline: 0;
+  box-shadow: 0 0 5px 0 #6f6b5c;
+  -webkit-box-shadow: 0 0 5px 0 #6f6b5c;
+  -moz-box-shadow: 0 0 5px 0 #6f6b5c;
+}
+#contactform input::-webkit-input-placeholder, #contactform textarea::-webkit-input-placeholder {
+  color: #b3afa0;
+}
+#contactform input:-moz-placeholder, #contactform textarea:-moz-placeholder {
+  color: #b3afa0;
+}
+#contactform input.submit {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  padding: .75em 2em;
+  color: #1a1607;
+  border: 1px solid #c4c0b1;
+  background: #e6e2d3;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f7f3e4), to(#e6e2d3));
+  background: -webkit-linear-gradient(#f7f3e4, #e6e2d3);
+  background: -moz-linear-gradient(center top, #f7f3e4 0%, #e6e2d3 100%);
+  background: -moz-gradient(center top, #f7f3e4 0%, #e6e2d3 100%);
+  font-weight: bold;
+  box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+  -webkit-box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+  -moz-box-shadow: inset 0 -1px 2px 0 #d5d1c2;
+  
+  left: 25%;
+  
+}
+
+#contactform select{
+	margin:10px 0px;
+}
+
+#contactform h2{
+	font-size:36px;
+}
+
 	
 	
    form label {
@@ -290,7 +371,7 @@ a:hover { color: #036; }
   color: red;
   border: 1px solid red;	
 }
- form input.text, .tab_content form textarea {
+ form input.text{
   width: 26%;
   float:left;
   -webkit-border-radius: 3px;
