@@ -1,30 +1,10 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Client extends CI_Controller {
-	
-	public function __construct(){
-		parent::__construct();
-		$this->load->model('image');
-		$this->catid = $this->image->get_catids();
-		
-	}
-	
-	public function index()
-	{
-		$this->load->helper(array('url'));
-		$cid = $this->uri->segment(2);	
-		
-		$data["title"] = "Marcus Turner Photography";
-		$images = $this->image->get_all_client_images();
-		$data["images"] = $images;
-		$this->load->view('/clients/index', $data);
-	}
-	
-
-
-	function upload(){
+function upload($type, $id){
+		$this->load->helper(array('url'));	
 		$targetDir = $_SERVER['DOCUMENT_ROOT'].'/images/';
-
+		
+		
 			//$cleanupTargetDir = false; // Remove old files
 			//$maxFileAge = 60 * 60; // Temp file age in seconds
 			
@@ -75,7 +55,18 @@ class Client extends CI_Controller {
 			} else
 				die('{"jsonrpc" : "2.0", "error" : {"code": 100, "message": "Failed to open temp directory."}, "id" : "id"}');
 			*/
-			
+			//INSERT INTO IMAGES TABLE
+			switch($type){
+				case "client":
+					$this->admin_model->new_client_image($fileName, $id);
+					break;
+				case "category":
+					$this->image->new_image($fileName, $id);
+					break;
+				
+				
+			}
+		
 			// Look for the content type header
 			if (isset($_SERVER["HTTP_CONTENT_TYPE"]))
 				$contentType = $_SERVER["HTTP_CONTENT_TYPE"];
@@ -87,6 +78,7 @@ class Client extends CI_Controller {
 			if (strpos($contentType, "multipart") !== false) {
 				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
 					// Open temp file
+					
 					$out = fopen($targetDir . DIRECTORY_SEPARATOR . $fileName, $chunk == 0 ? "wb" : "ab");
 					if ($out) {
 						// Read binary input stream and append it to temp file
@@ -126,10 +118,7 @@ class Client extends CI_Controller {
 			// Return JSON-RPC response
 			die('{"jsonrpc" : "2.0", "result" : null, "id" : "id"}');
 			
-			//INSERT INTO IMAGES TABLE
-			$this->image->new_images($fileName, $cat);
+			
 	}
 
-
-
-}
+?>

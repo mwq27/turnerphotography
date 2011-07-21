@@ -4,14 +4,19 @@ class Admin_model extends CI_Model {
 	
 		function db_safe($data) {
 	  
-	    if(!is_numeric($data) && $data != ""){
-	  
-	        $safe_data = mysql_real_escape_string(htmlentities(stripslashes(trim($data)), ENT_QUOTES, 'UTF-8')) or die(mysql_error());
-	        return $safe_data;
-	    }else return $data;
-	  }
+		    if(!is_numeric($data) && $data != ""){
+		  
+		        $safe_data = mysql_real_escape_string(htmlentities(stripslashes(trim($data)), ENT_QUOTES, 'UTF-8')) or die(mysql_error());
+		        return $safe_data;
+		    }else return $data;
+	  	}
 		
-		
+		function get_client_id($client){
+			$this->db->select("id")->from("clients")->where("client", $client);
+			$query = $this->db->get();
+			return $query->result();
+			
+		}
 		
 		
 		function login_user($uname, $pword)
@@ -41,6 +46,17 @@ class Admin_model extends CI_Model {
      		 }else{  return false;			
 			
 			}
+		}
+		
+		function new_client($client){
+			$client = $this->db_safe($client);
+			$date = date("Y-m-d g:i:s");
+			$sql = "insert into clients set client = '{$client}', created_at = '{$date}'";
+					
+			$query = $this->db->query($sql);
+			if($query){
+				return $this->db->insert_id();
+			}else return "fail";
 		}
 		
 		function register($email, $pword)

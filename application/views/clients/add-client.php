@@ -16,6 +16,8 @@
 					<input type="submit" value="Submit Information" class="button submit" id="profile-submit">
 				</p>
 	</form>
-</section>
+	
+	
+</section> 
 
 <? $this->load->view("/partials/footer"); ?>
