@@ -22,8 +22,8 @@
 $(function() {
 	$("#uploader").pluploadQueue({
 		// General settings
-		runtimes : 'gears,flash,silverlight,browserplus,html5',
-		url : '/admin/client_upload/<?=$cid[0]->id?>',
+		runtimes : 'html5',
+		url : '/admin/upload/<?=$cid[0]->id?>/',
 		max_file_size : '10mb',
 		unique_names : true,
 		drop_element: 'drop',
@@ -60,6 +60,9 @@ $(function() {
 				});
 
 				uploader.start();
+				 uploader.bind('Error', function(error){
+                    console.log(error);
+                });
 			} else
 				alert('You must at least upload one file.');
 

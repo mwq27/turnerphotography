@@ -21,8 +21,19 @@ class Image extends CI_Model {
 				return $query->result();
 		}
 		
+		
+		
 		function get_all_images(){
 				$this->db->select("filename")->from('images');
+				
+				
+				$query = $this->db->get();
+				return $query->result();
+			
+		}
+		
+		function get_all_client_images($cid){
+				$this->db->select("filename")->from('client_images')->where("client_id", $cid);
 				
 				
 				$query = $this->db->get();
@@ -44,6 +55,14 @@ class Image extends CI_Model {
 			
 			$date = date("Y-m-d g:i:s");
 			$sql = "insert into images set filename = '{$name}', category = '{$cid}',created_at = '{$date}'";
+			$this->db->query($sql);
+			
+		}
+		
+		function new_client_image($name, $cid){
+			
+			$date = date("Y-m-d g:i:s");
+			$sql = "insert into client_images set filename = '{$name}', client_id = '{$cid}',created_at = '{$date}'";
 			$this->db->query($sql);
 			
 		}

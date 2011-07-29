@@ -93,6 +93,7 @@ class Admin extends CI_Controller {
 			 $data['title'] = 'Admin Login';
 			 $this->load->view('admin/index', $data);
 		}else{
+			echo ""
 			$username = $this->input->post('email-log', TRUE);
 			$password = $this->input->post('password-log', TRUE);
      
@@ -196,13 +197,14 @@ class Admin extends CI_Controller {
 		
 	}
 	
-	function client_upload(){
+	public function client_upload(){
+		echo "5"; exit;
 		$this->load->helper(array('url', 'imgupload'));	
 		$cid = $this->uri->segment(3);
-		$this->imgupload->upload("client", $cid);
+		image_upload("client", $cid);
 	}
 
-	function upload(){
+	public function upload(){
 		$this->load->helper(array('url', 'imgupload'));	
 		$catid = $this->uri->segment(3);
 		$this->imgupload->upload("category", $catid);

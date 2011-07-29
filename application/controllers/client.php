@@ -12,17 +12,20 @@ class Client extends CI_Controller {
 	public function index()
 	{
 		$this->load->helper(array('url'));
-		$cid = $this->uri->segment(2);	
+		
+		$client = $this->uri->segment(2);
+		
+		$cid = $this->admin_model->get_client_id($client);
 		
 		$data["title"] = "Marcus Turner Photography";
-		$images = $this->image->get_all_client_images();
+		$images = $this->image->get_all_client_images($cid);
 		$data["images"] = $images;
 		$this->load->view('/clients/index', $data);
 	}
 	
 
 
-	function upload(){
+	private function upload(){
 		$targetDir = $_SERVER['DOCUMENT_ROOT'].'/images/';
 
 			//$cleanupTargetDir = false; // Remove old files

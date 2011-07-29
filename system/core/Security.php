@@ -60,7 +60,11 @@ class CI_Security {
 	{
 		// Append application specific cookie prefix to token name
 		$this->_csrf_cookie_name = (config_item('cookie_prefix')) ? config_item('cookie_prefix').$this->_csrf_token_name : $this->_csrf_token_name;
-
+		if (config_item('cookie_prefix')) {
+			
+			$this->_csrf_cookie_name = config_item('cookie_prefix').$this->_csrf_cookie_name;
+			
+		}
 		// Set the CSRF hash
 		$this->_csrf_set_hash();
 

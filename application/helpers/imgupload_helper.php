@@ -1,7 +1,7 @@
 <?php
 
-function upload($type, $id){
-		$this->load->helper(array('url'));	
+function image_upload($type, $id){
+		
 		$targetDir = $_SERVER['DOCUMENT_ROOT'].'/images/';
 		
 		
@@ -58,7 +58,7 @@ function upload($type, $id){
 			//INSERT INTO IMAGES TABLE
 			switch($type){
 				case "client":
-					$this->admin_model->new_client_image($fileName, $id);
+					$this->image->new_client_image($fileName, $id);
 					break;
 				case "category":
 					$this->image->new_image($fileName, $id);
