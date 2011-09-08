@@ -3,12 +3,17 @@
 
   <!-- JavaScript at the bottom for fast page loading -->
 
-  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if necessary -->
-  
-  
-  <!--<script src="/js/libs/plupload.full.js"></script>
-  <script src="/js/libs/jquery.plupload.queue/jquery.plupload.queue.js"></script>
-  -->
+ 
+  <!-- scripts concatenated and minified via ant build script-->
+  <script src="/js/libs/jquery.orbit-1.2.3.js"></script>
+  	<script type="text/javascript">
+			$(window).load(function() {
+				$('#featured').orbit();
+			});
+	</script> 
+  <script src="<?=base_url();?>publish/js/bf9ba877406d0afcbd976b7227fa3f0445bfa63b.js"></script>
+    <script src="<?=base_url();?>publish/js/libs/jquery.tools.min.js"></script>
+    <script src="<?=base_url();?>publish/js/script.js"></script>
   <!-- end scripts-->
 
 
@@ -17,21 +22,7 @@
     <script>DD_belatedPNG.fix("img, .png_bg"); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
   <![endif]-->
 
- 
-  
 
-
-  <!-- scripts concatenated and minified via ant build script-->
-  <!--<script src="/js/libs/jquery.orbit-1.2.3.js"></script>-->
-  	<script type="text/javascript">
-			$(window).load(function() {
-				//$('#featured').orbit();
-			});
-	</script>
-  <script src="<?=base_url();?>publish/js/bf9ba877406d0afcbd976b7227fa3f0445bfa63b.js"></script>
-  
- 
- <script src="<?=base_url();?>publish/js/script.js"></script>
   <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
   <script>
     var _gaq=[["_setAccount","UA-XXXXX-X"],["_trackPageview"]];

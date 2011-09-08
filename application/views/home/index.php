@@ -1,10 +1,13 @@
 <? $this->load->view("/partials/header.html"); ?>
 	
-		<h1>Marcus Turner Photography</h1>
+	
 	
 
-	<div class="container2" style="width: 900px; margin:0px auto;">
-		
+	<div class="container2" style="">
+		<div class="logo">
+			<? $this->load->view("/partials/leftnav"); ?>
+			
+		</div>
 		<div id="gallery" class="content">
 					<div id="controls" class="controls"></div>
 					<div class="slideshow-container">
@@ -14,26 +17,33 @@
 					<div id="caption" class="caption-container"></div>
 		
 		</div>
+		<div class="clear"></div>
 		
-		<div id="thumbs" class="navigation">
+		
+		
+		
+	</div>
+	
+	<div id="thumbs" class="navigation">
 					<ul class="thumbs noscript">
 											
 						<?	$x = 0;
-							echo count($images); 
+							
+							
 							foreach($images as $row){
 						?>
 						
 								
 						<li>
-							<a class="thumb" name = "<?=$row->filename?>" href="<? echo base_url().'images/'.$row->filename;?>" title="Title #<?=$x?>">
+							<a class="thumb" name = "<?=$row->filename?>" href="<? echo base_url().$row->filename;?>" title="Title #<?=$x?>">
 								
-								<img src = "http://farm4.static.flickr.com/3261/2538183196_8baf9a8015_s.jpg" alt="Title #<?=$x?>" />
+								<img src = "<? echo base_url().$row->thumb;?>" alt="Title #<?=$x?>" />
 								
 								
 								
 							</a>
 							<div class="caption">
-				                (Any html can go here)
+				                
 				            </div>
 						</li>
 						<?	
@@ -44,15 +54,11 @@
 						?>
 					</ul>
 		</div>
-		
-		
-		
-	</div>
 	
 	
 <script>
 $(document).ready(function(){
-	$('div.navigation').css({'width' : '300px', 'float' : 'left'});
+	$('div.navigation').css({});
 				$('div.content').css('display', 'block');
 
 				// Initially set opacity on thumbs and add
@@ -68,10 +74,10 @@ $(document).ready(function(){
 				// Initialize Advanced Galleriffic Gallery
 				var gallery = $('#thumbs').galleriffic({
 					delay:                     2500,
-					numThumbs:                 15,
+					numThumbs:                 17,
 					preloadAhead:              10,
 					enableTopPager:            true,
-					enableBottomPager:         true,
+					enableBottomPager:         false,
 					maxPagesToShow:            7,
 					imageContainerSel:         '#slideshow',
 					controlsContainerSel:      '#controls',
@@ -85,10 +91,11 @@ $(document).ready(function(){
 					nextLinkText:              'Next Photo &rsaquo;',
 					nextPageLinkText:          'Next &rsaquo;',
 					prevPageLinkText:          '&lsaquo; Prev',
-					enableHistory:             true,
+					enableHistory:             false,
 					autoStart:                 false,
 					syncTransitions:           true,
 					defaultTransitionDuration: 900,
+					enableKeyboardNavigation:	false,
 					onSlideChange:             function(prevIndex, nextIndex) {
 						// 'this' refers to the gallery, which is an extension of $('#thumbs')
 						this.find('ul.thumbs').children()
@@ -103,6 +110,18 @@ $(document).ready(function(){
 					}
 				});
 				
+				
+				var triggers = $("#contactlink").overlay({
+					mask: {
+								color: '#ebecff',
+								loadSpeed: 200,
+								opacity: 0.9
+						},
+					closeOnClick: true
+				});
+				
+				
+			
 			});
 </script>
 

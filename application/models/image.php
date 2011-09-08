@@ -14,7 +14,7 @@ class Image extends CI_Model {
 		
 		function get_images($cat){
 								
-				$this->db->select("filename")->from('images')->where('category', $cat);
+				$this->db->select("filename, thumb")->from('images')->where('category', $cat);
 				
 				
 				$query = $this->db->get();
@@ -24,7 +24,7 @@ class Image extends CI_Model {
 		
 		
 		function get_all_images(){
-				$this->db->select("filename")->from('images');
+				$this->db->select("filename, thumb")->from('images');
 				
 				
 				$query = $this->db->get();
@@ -45,24 +45,24 @@ class Image extends CI_Model {
 			$this->db->select("*")->from("categories");
 			$query = $this->db->get();
 			foreach($query->result_array() as $val){
-				$cats[$val["id"]] = $val["category"];
+				$cats[$val["id"]] = array("category" => $val["category"], "active" => $val['active']);
 			}
 			return $cats;
 			
 		}
 		
-		function new_image($name, $cid){
+		function new_image($name,$thumb, $cid){
 			
 			$date = date("Y-m-d g:i:s");
-			$sql = "insert into images set filename = '{$name}', category = '{$cid}',created_at = '{$date}'";
+			$sql = "insert into images set filename = '{$name}',thumb = '{$thumb}', category = '{$cid}',created_at = '{$date}'";
 			$this->db->query($sql);
 			
 		}
 		
-		function new_client_image($name, $cid){
+		function new_client_image($name,$thumb, $cid){
 			
 			$date = date("Y-m-d g:i:s");
-			$sql = "insert into client_images set filename = '{$name}', client_id = '{$cid}',created_at = '{$date}'";
+			$sql = "insert into client_images set filename = '{$name}',thumb = '{$thumb}', client_id = '{$cid}',created_at = '{$date}'";
 			$this->db->query($sql);
 			
 		}

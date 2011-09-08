@@ -75,6 +75,16 @@ class Admin extends CI_Controller {
 		
 	}
 	
+	function set_active(){
+		$this->load->helper(array('form'));
+		$act = $this->input->post("val");
+		$cat = $this->input->post("cat");
+		
+		$set = $this->image->set_status($cat, $act);
+		
+		
+	}
+	
 	public function registration(){
 		$this->load->helper("form");
 		$data["title"] = "Marcus Turner Photography";
@@ -194,6 +204,7 @@ class Admin extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		$catid = $this->uri->segment(3);
 		$cat = $this->catid[$catid];
+		$data['title'] = "Image Uploads";
 		$data["catid"] = $catid;
 		$data["category"] = $cat;
 		$this->load->view("admin/new-image", $data);

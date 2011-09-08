@@ -10,7 +10,7 @@ class Content extends CI_Controller {
 	}
 	
 	public function index()
-	{
+	{	$this->load->helper(array('url', 'form'));
 		$data["title"] = "Marcus Turner Photography";
 		$images = $this->image->get_all_images();
 		$data["images"] = $images;
@@ -18,15 +18,17 @@ class Content extends CI_Controller {
 	}
 	
 	public function category(){
-		$this->load->helper(array('url'));
+		$this->load->helper(array('url', 'form'));
 		
 		
 		$cat = $this->uri->segment(2);
+		$data['category'] = $cat;
 		$data['title'] = "Marcus Turner Photography | " .$cat;
 		$keys = array_keys($this->catid, $cat); 
 		$data["catid"] = $keys[0];
 		
 		$images = $this->image->get_images($keys[0]);
+		
 		$data["images"] = $images;
 		$this->load->view("/category/category", $data);
 	}
@@ -36,14 +38,7 @@ class Content extends CI_Controller {
 		$this->load->library('email');
 		$data['title'] = 'Contact me';
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Name', 'trim|required');
-		$this->form_validation->set_rules('email', 'Email', 'trim|required');
-    
-		if ($this->form_validation->run() == FALSE){
-			
-			 
-			 $this->load->view('home/contact', $data);
-		}else{
+		    
 			$name = $this->input->post('name', true);
 			$email = $this->input->post('email', true);
 			$type = $this->input->post('request', true);
@@ -54,8 +49,8 @@ class Content extends CI_Controller {
                 $this->email->reply_to("no-reply@marcusturnerphotography.com", "No Reply"); 
                 $this->email->bcc('marques.woodson@gmail.com'); 
                 
-                $this->email->subject('Your Last Call Vip Account Details');
-                $this->email->message("<h2>Thank you for registering with Last Call VIP</h2>
+                $this->email->subject('Message received at Marcus Turner Photography');
+                $this->email->message("<h2>Thank you for your interest in Marcus Turner Photography</h2>
                 <ul style='list-style-type:none; font-size:14px; padding:0px;'>
                 <li> {$name} {$email}</li>
                 <li> {$comments}</li>
@@ -63,10 +58,12 @@ class Content extends CI_Controller {
                 <p>$type</p>
                
                 ");  
-          
+          if($name != ""){
                 $this->email->send();
-				$this->load->view('home/contact-success', $data);
-		}
+				return '1';
+		  }
+				//$this->load->view('home/contact-success', $data);
+		
 		
 		
 	}

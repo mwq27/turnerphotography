@@ -24,7 +24,7 @@ $(function() {
 		url : '/admin/upload/<?=$catid?>',
 		max_file_size : '10mb',
 		unique_names : true,
-		drop_element: 'drop',
+	
 		multiple_queues: true,
 
 		// Resize images on clientside if we can

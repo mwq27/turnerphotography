@@ -25,14 +25,17 @@
 
 
   <!-- CSS: implied media="all" -->
-  <link rel="stylesheet" href="/css/style.css?v=2">
-	<link rel="stylesheet" href="/css/orbit-1.2.3.css?v=2">
-	<link rel="stylesheet" href="/css/jquery.plupload.queue.css?v=2">
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="<?=base_url();?>publish/css/b3b8f265e20b252893de8b1c40ddbdfb1fda8796.css">
+	<!-- end CSS-->
+	
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="/js/libs/modernizr-1.7.min.js"></script>
+  
+  <script src="<?=base_url();?>js/libs/modernizr-2.0.6.min.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script>
 
 </head>
 
