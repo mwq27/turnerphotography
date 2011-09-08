@@ -1,15 +1,9 @@
-<nav class=side-ul>
+<nav class="side-ul">
 				<ul>
-					
-					
-					
-					<!-- #141414 -->
-					
-					<li><a href="/c/Sports-and-Fitness">Men</a></li>
-					<li><a href="/c/Sports-and-Fitness">Women</a></li>
+					<li><a href="/c/Beauty">Beauty</a></li>
+					<li><a href="/c/Fashion">Fashion</a></li>
+					<li><a href="/c/Editorial">Editorial</a></li>
+					<li><a href="/c/Sports-and-Fitness">Sports &amp; Fitness</a></li>
 					<li><a href="/c/Personal">Personal</a></li>
-					
-					<li>About Me</li>
-					<li><a href="/content/contact">Contact</a></li>
 				</ul>
 			</nav>

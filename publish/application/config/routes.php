@@ -41,6 +41,7 @@
 $route['default_controller'] = "content";
 $route['404_override'] = '';
 $route['c/:any'] = "content/category/$1";
+$route['client/:any'] = "client/index/$1";
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

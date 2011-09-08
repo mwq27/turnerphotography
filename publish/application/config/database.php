@@ -42,9 +42,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'deff6e1dcf';
-$db['default']['database'] = 'turner';
+$db['default']['username'] = 'marcust2_turner';
+$db['default']['password'] = '$chem@t@';
+$db['default']['database'] = 'marcust2_turner';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
